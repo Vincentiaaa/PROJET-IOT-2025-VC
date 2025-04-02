@@ -19,7 +19,19 @@ elif page == "Toutes les armes":
 elif page == "Recherche spécifique":
     st.title("Vous cherchez quelque chose ? Regardez nos catégories :")
     if st.button("10 Meilleures armes de feu"):
-        bestfire = ds3.loc[ds3['Fire Damage']].max()
-        st.write(bestfire)
+        bestfire = ds3.sort_values(by="Fire Damage", ascending=False).iloc[:10]
+        st.write(bestfire.loc[:, ["Name", "Fire Damage"]])
+    if st.button("10 Meilleures armes physiques"):
+        bestphy = ds3.sort_values(by="Physical Damage", ascending=False).iloc[:10]
+        st.write(bestphy.loc[:, ["Name", "Physical Damage"]])
+    if st.button("10 Meilleures armes magiques"):
+        bestmag = ds3.sort_values(by="Magic Damage", ascending=False).iloc[:10]
+        st.write(bestmag.loc[:, ["Name", "Magic Damage"]])
+    if st.button("10 Meilleures armes électiques"):
+        bestlig = ds3.sort_values(by="Lightning Damage", ascending=False).iloc[:10]
+        st.write(bestlig.loc[:, ["Name", "Lightning Damage"]])
+    if st.button("10 Meilleures armes occultes"):
+        bestdark = ds3.sort_values(by="Dark Damage", ascending=False).iloc[:10]
+        st.write(bestdark.loc[:, ["Name", "Dark Damage"]])
 
 
