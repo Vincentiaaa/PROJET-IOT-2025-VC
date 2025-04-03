@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import altair as alt
 
 ds3 = pd.read_csv("DS3_weapon.csv")
 del ds3["Stability"]
@@ -13,6 +15,10 @@ page = st.sidebar.radio("Navigation", ["Accueil","Toutes les armes", "Recherche 
 if page == "Accueil":
     st.title("Bienvenue sur DS3 Weapons !")
     st.image("https://p325k7wa.twic.pics/high/dark-souls/dark-souls-2/00-page-setup/ds2_game-thumbnail.jpg?twic=v1/resize=760/step=10/quality=80", caption = "image dark souls 2")
+    ds3graph = ds3[["Fire Damage", "Magic Damage"]]
+    st.scatter_chart(ds3graph)
+
+
 elif page == "Toutes les armes":
     st.title("Liste des armes de Dark Souls 3 :")
     st.dataframe(ds3)
@@ -21,6 +27,11 @@ elif page == "Recherche spécifique":
     if st.button("10 Meilleures armes de feu"):
         bestfire = ds3.sort_values(by="Fire Damage", ascending=False).iloc[:10]
         st.write(bestfire.loc[:, ["Name", "Fire Damage"]])
+        fig, ax = plt.subplots()
+        ax.plot(bestfire["Fire Damage"], bestfire["Name"])
+        ax.set_xlabel("Fire Damage")
+        ax.set_ylabel("Name")
+        st.pyplot(fig)
     if st.button("10 Meilleures armes physiques"):
         bestphy = ds3.sort_values(by="Physical Damage", ascending=False).iloc[:10]
         st.write(bestphy.loc[:, ["Name", "Physical Damage"]])
