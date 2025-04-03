@@ -27,10 +27,13 @@ elif page == "Recherche spécifique":
     if st.button("10 Meilleures armes de feu"):
         bestfire = ds3.sort_values(by="Fire Damage", ascending=False).iloc[:10]
         st.write(bestfire.loc[:, ["Name", "Fire Damage"]])
+        bestfire2 = ds3.sort_values(by="Fire Damage", ascending=True).iloc[-10:]
         fig, ax = plt.subplots()
-        ax.plot(bestfire["Fire Damage"], bestfire["Name"])
-        ax.set_xlabel("Fire Damage")
-        ax.set_ylabel("Name")
+        plt.title("10 Best Fire Damage Weapons in Dark Souls 3", color = "blue")
+        ax.plot(bestfire2["Fire Damage"], bestfire2["Name"], marker ='D', linestyle = ':', color = "black")
+        ax.set_xlabel("Fire Damage", color = "red")
+        ax.set_ylabel("Item Name", color = "green")
+        plt.grid(True)
         st.pyplot(fig)
     if st.button("10 Meilleures armes physiques"):
         bestphy = ds3.sort_values(by="Physical Damage", ascending=False).iloc[:10]
