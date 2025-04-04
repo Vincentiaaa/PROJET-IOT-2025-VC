@@ -19,7 +19,8 @@ if page == "Home":
         total = much.count()
         st.write(f"There are {total} Weapons in Dark Souls 3 !")
         st.image("https://p325k7wa.twic.pics/high/dark-souls/dark-souls-2/00-page-setup/ds2_game-thumbnail.jpg?twic=v1/resize=760/step=10/quality=80", caption = "image dark souls 2")
-
+    grouped_ds3 = ds3.groupby("Name")["Category"].count()
+    st.write(grouped_ds3)
 
 
 
