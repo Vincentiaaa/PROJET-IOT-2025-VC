@@ -19,16 +19,18 @@ if page == "Home":
         total = much.count()
         st.write(f"There are {total} Weapons in Dark Souls 3 !")
         st.image("https://p325k7wa.twic.pics/high/dark-souls/dark-souls-2/00-page-setup/ds2_game-thumbnail.jpg?twic=v1/resize=760/step=10/quality=80", caption = "image dark souls 2")
-    grouped_ds3 = ds3.groupby("Name")["Category"].count()
-    st.write(grouped_ds3)
-
 
 
 
 
 elif page == "Weapon list":
-    st.title("Dark souls 3 weapons list :")
+    st.title("Raw Dark souls 3 weapons list :")
     st.dataframe(ds3)
+    st.title("Now if you want a better interface, and a better comprehension, here it is : ")
+    if st.button("See it !"):
+        grouped_ds3 = ds3.groupby("Category")["Name"].apply(list)
+        st.write(grouped_ds3)
+
 elif page == "Search":
     st.title("Searching something ? Check out our recommandations :")
     if st.button("10 Best Fire Weapons"):
@@ -76,7 +78,7 @@ elif page == "Search":
         plt.grid(True)
         st.pyplot(fig)
 elif page == "Fun facts":
-    if st.button("Let's count all weight weapons !"):
+    if st.button("How many weapons got the same weight ? "):
         wei = ds3["Weight"].value_counts()
         st.write(wei)
     if st.button("Then , how much weight do we obtain if we add everything ?"):
