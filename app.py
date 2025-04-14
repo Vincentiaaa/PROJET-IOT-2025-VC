@@ -8,7 +8,7 @@ del ds3["Stability"]
 del ds3["Sell Price"]
 del ds3["Critical"]
 ds3[['Physical Damage', 'Magic Damage', 'Fire Damage','Lightning Damage', 'Dark Damage']] = ds3["Damage"].str.split('/', expand=True)
-del ds3["Damage"]
+ds3 = ds3.assign(**{"Raw Damage": ds3["Damage"]}).drop(columns=["Damage"])
 
 page = st.sidebar.radio("Navigate", ["Home","Weapon list", "Search", "Fun facts"])
 
